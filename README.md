@@ -14,6 +14,6 @@ Principais funcionalidades do MapScore:
    
 4. 🔍 Filtros e seleção personalizada: O MapScore oferece a possibilidade de filtrar os dados por departamento e por ano, permitindo uma 🕵️ análise mais específica e segmentada do desempenho acadêmico.
 
-O desenvolvimento do MapScore foi realizado utilizando a linguagem de programação Python e as bibliotecas Dash, Plotly e Pandas. A aplicação foi projetada para ser executada em um ambiente web e pode ser acessada por meio de um navegador. Além disso, o código-fonte do MapScore está disponível no GitHub 🐙, permitindo a contribuição da comunidade e o aprimoramento contínuo da aplicação.
+O desenvolvimento do MapScore foi realizado utilizando a linguagem de programação Python e as bibliotecas Streamlit, Plotly e Pandas. A aplicação foi projetada para ser executada em um ambiente web e pode ser acessada por meio de um navegador. Além disso, o código-fonte do MapScore está disponível no GitHub 🐙, permitindo a contribuição da comunidade e o aprimoramento contínuo da aplicação.
 
 O MapScore foi concebido com o propósito de fornecer uma ferramenta útil e prática para auxiliar na gestão e no aprimoramento do curso de Engenharia Cartográfica e de Agrimensura da UFPR. Esperamos que essa aplicação contribua para uma análise mais eficiente e precisa do desempenho acadêmico dos alunos, possibilitando a identificação de áreas de melhoria e o desenvolvimento de ações que promovam a qualidade do ensino. 🚀🎓
