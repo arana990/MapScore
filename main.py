@@ -197,3 +197,10 @@ for i, cor in enumerate(coresi):
     fig_ocupacao.update_traces(marker_color=cor, selector=dict(type='bar', name=dados_ocup.columns[i+1]))
 
 st.plotly_chart(fig_ocupacao,use_container_width=True)
+
+# Botão para direcionar o usuário à página do curso
+st.write('Clique no botão abaixo para acessar a página do curso:')
+if st.button('Página do Curso'):
+    # Redirecionar o usuário para a página do curso
+    import webbrowser
+    webbrowser.open('https://cartografica.ufpr.br')
