@@ -81,7 +81,7 @@ for i in atributos:
 
 # Definir as cores desejadas
 corespi = ['rgb(305, 177,  64)', #laranja
-           'rgb(198, 153, 239)',  #lilas
+           'rgb(198, 153, 239)', #lilas
            'rgb( 94, 210,  94)', #verde
            'rgb(264,  89,  90)', #vermelho
            'rgb( 81, 169, 230)'] #azul
@@ -94,11 +94,8 @@ layout = go.Layout(title='Dados globais do ano: %s' %ano_filtrado )
 
 fig_pizza = go.Figure(data=[grafico_pizza], layout=layout)
 
-#grafico_pizza = px.pie(dados_ano)
-st.plotly_chart(fig_pizza)
-
-#st.dataframe(turmas)
-
+# Grafico de pizza
+st.plotly_chart(fig_pizza,use_container_width=True)
 
 # Agrupando os dados para o gráfico de Rendimento Acadêmico
 dados_agrupados = turmas.groupby('codigo').agg({
