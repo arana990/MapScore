@@ -3,14 +3,22 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.title("MapScore")
+st.title("🗺️🎯 MapScore 📚🚀")
 st.subheader("Engenharia Cartográfica e de Agrimensura UFPR")
 
-st.sidebar.text("Opções de filtro")
+# Texto explicativo
+st.write("Este dashboard foi criado para analisar os dados das turmas oferecidas por departamento e ano. "
+         "Você pode utilizar os filtros na barra lateral para selecionar o ano e o departamento de interesse. "
+         "Os gráficos apresentam informações sobre o rendimento acadêmico, número de matriculados, cancelados, "
+         "aprovados e outras métricas relevantes. Explore os dados e descubra insights interessantes sobre as turmas!")
 
-# Estatísticas das turmas: taxa de aprovação, reprovação (nota e frequência)
+# Introdução
+st.sidebar.title("Introdução")
+st.sidebar.write("ℹ️ Este é um dashboard interativo que exibe informações sobre as turmas oferecidas por departamento e ano. "
+                 "Use os filtros abaixo para explorar os dados.")
+
+# Carregando os dados
 turmas = pd.read_csv("DADOS ALUNOS/turmas.csv", sep=';', encoding='ISO-8859-1')
-
 ofertas = pd.read_csv("DADOS CURSO/ofertas.csv", sep=';', encoding='ISO-8859-1')
 
 turmas['semestre'] = pd.Series(['OP.']*len(turmas), name='semestre')
@@ -21,6 +29,7 @@ for i in range(len(ofertas)):
 # Adicionar informação do semestre à string do código
 turmas['codigo'] = turmas['semestre'].astype(str) + '-' + turmas['codigo']
 
+# Opções para os filtros
 # Filtrar por departamento
 departamentos_disponiveis = ['Todos departamentos'] + turmas['departamento'].unique().tolist()
 departamento_filtrado = st.sidebar.selectbox("Selecione um departamento:", departamentos_disponiveis)
@@ -34,6 +43,12 @@ ano_filtrado = st.sidebar.selectbox("Selecione um ano:", anos_disponiveis)
 
 if ano_filtrado:
     turmas = turmas[turmas['ano'] == ano_filtrado]
+
+# Logo do curso
+logo_path = "IMAGEM/LOGO_TEXTO_VERTICAL.png"
+st.sidebar.image(logo_path, use_column_width=True)
+
+st.sidebar.markdown("###### 👨‍💻 Desenvolvido por: Prof. Daniel Arana")
 
 # Gráfico de pizza
 dados_ano = turmas.groupby('ano').agg({
