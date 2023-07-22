@@ -48,7 +48,7 @@ if ano_filtrado:
 logo_path = "IMAGEM/LOGO_TEXTO_VERTICAL.png"
 st.sidebar.image(logo_path, use_column_width=True)
 
-st.sidebar.markdown("###### 👨‍💻 Desenvolvido por: Prof. Daniel Arana")
+st.sidebar.markdown("###### 👨‍💻 Developed by: Prof. Daniel Arana, Map&Ação")
 
 # Gráfico de pizza
 dados_ano = turmas.groupby('ano').agg({
