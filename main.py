@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.title("🗺️🎯 MapScore 📚🚀")
+st.title("🗺️🎯 Map&Score 📚🚀")
 st.subheader("Engenharia Cartográfica e de Agrimensura UFPR")
 
 # Texto explicativo
