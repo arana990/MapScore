@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import webbrowser
+
+st.set_page_config(layout="wide")
+#st.set_option('theme', base="light")
+
 
 st.title("🗺️🎯 Map&Score 📚🚀")
 st.subheader("Engenharia Cartográfica e de Agrimensura UFPR")
@@ -45,8 +50,18 @@ if ano_filtrado:
     turmas = turmas[turmas['ano'] == ano_filtrado]
 
 # Logo do curso
-logo_path = "IMAGEM/LOGO_TEXTO_VERTICAL.png"
-st.sidebar.image(logo_path, use_column_width=True)
+logo_curso_path = "IMAGEM/LOGO_TEXTO_VERTICAL.png"
+# Logo do UFPR
+logo_ufpr_path = "IMAGEM/LOGO_UFPR.png"
+
+# Colocar as duas imagens lado a lado
+col1, col2 = st.sidebar.columns(2)
+
+# Inserir a primeira imagem na primeira coluna
+col1.image(logo_curso_path, use_column_width=True)
+
+# Inserir a segunda imagem na segunda coluna
+col2.image(logo_ufpr_path, use_column_width=True)
 
 st.sidebar.markdown("###### 👨‍💻 Developed by: Prof. Dr. Daniel Arana, Map&Ação")
 
@@ -81,7 +96,7 @@ for i in atributos:
 
 # Definir as cores desejadas
 corespi = ['rgb(305, 177,  64)', #laranja
-           'rgb(198, 153, 239)', #lilas
+           'rgb(198, 153, 239)',  #lilas
            'rgb( 94, 210,  94)', #verde
            'rgb(264,  89,  90)', #vermelho
            'rgb( 81, 169, 230)'] #azul
@@ -92,10 +107,16 @@ grafico_pizza = go.Pie(labels=['Matriculados','Cancelados','Aprovados','Repr. Fr
 
 layout = go.Layout(title='Dados globais do ano: %s' %ano_filtrado )
 
-fig_pizza = go.Figure(data=[grafico_pizza], layout=layout)
-
 # Grafico de pizza
+fig_pizza = go.Figure(data=[grafico_pizza], layout=layout)
 st.plotly_chart(fig_pizza,use_container_width=True)
+
+with st.expander("Fonte dos dados: SIGA."):
+    st.write("O gráfico de pizza é configurado para exibir cinco categorias: Matriculados, Cancelados, Aprovados, Repr. Frequência (Reprovados por Frequência) e Repr. Nota (Reprovados por Nota). "
+             "Neste contexto, ele pode ser usado para fornecer uma visão geral do desempenho acadêmico dos alunos, mostrando quantos estão matriculados, quantos foram aprovados, quantos foram reprovados por frequência, quantos foram reprovados por nota e quantos cancelaram a disciplina.")
+
+#st.write("Fonte dos dados: SIGA", font='size': 10)
+
 
 # Agrupando os dados para o gráfico de Rendimento Acadêmico
 dados_agrupados = turmas.groupby('codigo').agg({
@@ -137,6 +158,11 @@ for i, cor in enumerate(cores):
     fig_rendimento.update_traces(marker_color=cor, selector=dict(type='bar', name=dados_agrupados.columns[i+1]))
 
 st.plotly_chart(fig_rendimento,use_container_width=True)
+with st.expander("Fonte dos dados: SIGA."):
+    st.write("O gráfico apresenta o rendimento acadêmico por disciplina, exibindo a distribuição proporcional dos resultados dos alunos em cada uma delas. Cada barra representa uma disciplina e é dividida em cinco segmentos, cada um correspondendo a uma categoria de rendimento: Matriculados, Cancelados, Aprovados, Reprovados por Frequência e Reprovados por Nota. "
+             "A altura de cada barra representa o número total de alunos matriculados na disciplina, enquanto as cores dos segmentos representam a proporção de alunos com resultados acadêmicos diferentes."
+             "O gráfico é interativo, permitindo ao usuário clicar sobre as categorias da legenda para habilitar ou desabilitar a exibição das barras correspondentes, o que possibilita uma análise mais detalhada das disciplinas específicas de interesse. "
+             "Os número de 1 a 9 como prefixos aos códigos das disciplinas indicam o período de acordo com o  Projeto Pedagógico do Curso. O prefixo \"OP\" sinaliza as disciplinas optativas")
 
 # Agrupando os dados para o gráfico de Rendimento %
 matr = (dados_agrupados['Matriculados'] / dados_agrupados['total'])* 100
@@ -169,6 +195,12 @@ for i, cor in enumerate(cores):
 
 st.plotly_chart(fig_rendimento_p,use_container_width=True)
 
+with st.expander("Fonte dos dados: SIGA."):
+    st.write("O gráfico apresenta o rendimento acadêmico em forma de porcentagem por disciplina, exibindo a proporção de alunos com diferentes resultados acadêmicos em relação ao número total de matriculados em cada disciplina. Cada barra representa uma disciplina e é dividida em cinco segmentos, cada um correspondendo a uma categoria de rendimento: Matriculados, Cancelados, Aprovados, Reprovados por Frequência e Reprovados por Nota. "
+             "A altura de cada barra representa a porcentagem de alunos em relação ao total de matriculados na disciplina, possibilitando uma análise mais precisa do desempenho acadêmico. "
+             "O gráfico é interativo, permitindo ao usuário clicar sobre as categorias da legenda para habilitar ou desabilitar a exibição das barras correspondentes, o que possibilita uma análise mais detalhada das disciplinas específicas de interesse. "
+             "Os número de 1 a 9 como prefixos aos códigos das disciplinas indicam o período de acordo com o  Projeto Pedagógico do Curso. O prefixo \"OP\" sinaliza as disciplinas optativas")
+
 
 # Agrupando os dados para o gráfico de Ocupação de Vaga
 
@@ -197,6 +229,14 @@ for i, cor in enumerate(coresi):
     fig_ocupacao.update_traces(marker_color=cor, selector=dict(type='bar', name=dados_ocup.columns[i+1]))
 
 st.plotly_chart(fig_ocupacao,use_container_width=True)
+
+with st.expander("Fonte dos dados: SIGA."):
+    st.write("O gráfico exibe a ocupação de vagas em disciplinas do curso de Engenharia Cartográfica e de Agrimensura da UFPR. "
+             "Cada barra representa uma disciplina e é dividida em dois segmentos, sendo um correspondente ao número de vagas ocupadas e outro ao número de vagas não ocupadas. "
+             "A altura de cada barra representa a quantidade de vagas em cada categoria, possibilitando a visualização clara da proporção de vagas ocupadas e não ocupadas em cada disciplina. "
+             "O gráfico é interativo e permite ao usuário clicar sobre as categorias da legenda para habilitar ou desabilitar a exibição das barras correspondentes, possibilitando uma análise mais detalhada das disciplinas específicas de interesse. "
+             "Os número de 1 a 9 como prefixos aos códigos das disciplinas indicam o período de acordo com o  Projeto Pedagógico do Curso. O prefixo \"OP\" sinaliza as disciplinas optativas")
+
 
 # Botão para direcionar o usuário à página do curso
 st.write('Clique no botão abaixo para acessar a página do curso:')
