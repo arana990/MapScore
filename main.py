@@ -243,4 +243,4 @@ st.write('Clique no botão abaixo para acessar a página do curso:')
 if st.button('Página do Curso'):
     # Redirecionar o usuário para a página do curso
     import webbrowser
-    webbrowser.open('https://cartografica.ufpr.br')
+    webbrowser.open("https://cartografica.ufpr.br")
