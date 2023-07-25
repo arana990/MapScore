@@ -1,0 +1,6 @@
+[theme]
+sidebar.minWidth = 100
+base="light"
+
+[server]
+wideMode = true
